@@ -45,7 +45,7 @@ print(solution(L, 58) )
 :: 리스트에서 원소 찾아내기 ::
 
 '''
-
+ 
 def solution2(L, x):
     answer = []
     if x in L :
