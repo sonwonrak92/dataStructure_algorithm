@@ -34,3 +34,27 @@ def solution(L, x):
     return answer
 
 print(solution(L, 58) )
+
+'''
+
+### Python Algorithm Study ###
+# author  : laziness
+# date    : 2019/08/04
+
+두 번째 과제 -02
+:: 리스트에서 원소 찾아내기 ::
+
+'''
+
+def solution2(L, x):
+    answer = []
+    if x in L :
+        for i, val in enumerate(L) : 
+            if val == x :                
+                answer.append(i)        
+    else :
+        answer = [-1]
+    return answer
+
+    
+print(solution2(L, 58) )
