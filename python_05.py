@@ -15,7 +15,7 @@ test02 = [55]
 test03 = [1,2,3,4,5,6,7,8,22,44,66,321]
 
 def solution(L, x, l, u):
-    if L.count(x) > 0 :
+    if L.count(x) < 0 :
         return -1
     mid = (l + u) // 2
     if x == L[mid]:
