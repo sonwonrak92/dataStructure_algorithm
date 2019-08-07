@@ -18,8 +18,9 @@ test02 = [55]
 test03 = [1,2,3,4,5,6,7,8,22,44,66,321]
 
 def solution(x):
-    answer = 0
-    a
-    bin
-    c
-    return answer
+    if x == 0 or x == 1 :
+        return x
+        
+    else :
+        return solution(x-1) + solution(x-2)
+    
