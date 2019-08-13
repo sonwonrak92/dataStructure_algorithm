@@ -81,6 +81,7 @@ class DoublyLinkedList:
         2.이전 노드의 넥스트를 알 수 있고 이것을 지우면서 해야되는 절차를 구현하면 된다.
         3.지워질 넥스트 노드의 next를 이전 노드의 next로 할당하고
         4.넥스트 노드의 next에 해당하는 노드의 prev에 이전 노드를 할당하면 끝.
+        5.주의할점은 파라미터로 들어오는 prev가 tail이면 after 노드가 none이기에 그냥 리턴처리해야됨.
         '''
         curr = prev.next #이전 노드의 next가 지워질 노드
         next = curr.next # 지워질 노드의 next를 next에 할당
