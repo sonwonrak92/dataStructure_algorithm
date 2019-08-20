@@ -12,7 +12,7 @@ class ArrayStack:
     
     def __init__(self):
         self.data = []
-
+ 
     def size(self):
         return len(self.data)
 
