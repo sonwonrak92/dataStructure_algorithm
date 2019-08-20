@@ -18,7 +18,7 @@ class ArrayStack:
 
     def isEmpty(self):
         return self.size() == 0
-
+ 
     def push(self, item):
         self.data.append(item)
 
