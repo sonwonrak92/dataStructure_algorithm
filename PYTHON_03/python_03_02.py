@@ -18,7 +18,7 @@ class ArrayStack:
 
     def isEmpty(self):
         return self.size() == 0
-   
+
     def push(self, item):
         self.data.append(item)
 
@@ -28,25 +28,43 @@ class ArrayStack:
     def peek(self):
         return self.data[-1]
 
+prec = {
+    '*': 3, '/': 3,
+    '+': 2, '-': 2,
+    '(': 1
+}
 
-def solution(expr):
-    match = {
-        ')': '(',
-        '}': '{',
-        ']': '['
-    }
+def solution(S):
+    opStack = ArrayStack()
+    answer = ''
+    
+    for token in S :
+        if token in prec :#연산자면 스택에 푸쉬한다 
+            if not opStack.isEmpty() :  #스택이 비어있지 않으면,              
+                if token is '(' : #여는 괄호는 무조건 푸쉬만한다
+                    opStack.push(token)
 
-    S = ArrayStack()
-    for c in expr:
-        if c in '({[':  #괄호가 나올 경우 연산자스택에 넣는다.          
-            S.push(c)
+                elif prec[token] <= prec[opStack.peek()] : #스택에 존재하는 연산자의 우선순위가 높거나 같을 경우 스택의 연산자를 팝 한 후 어팬드하고 낮은 연산자를 푸쉬한다
+                    answer+= (opStack.pop())
+                    opStack.push(token)
 
-        elif c in match:    #닫는 괄호가 나올 경우에는 여는 괄호를 담는 스택이 비어있는지 확인한다.
-            if S.isEmpty() : #비어있다면 여는 괄호가 없이 닫는 괄호만 존재한다는 것이므로 리턴한다.
-                return False
-            else:                
-                t = S.pop() 
-                if t != match[c]: #닫는 괄호끼리 짝이 안맞는것이 존재하면 리턴한다.
-                    return False
+                else : #스택에 존재하는 연산자가 우선순위가 낮을 경우 그대로 푸쉬만한다.
+                    opStack.push(token)
 
-    return S.isEmpty()
+            else : #스택이 비어있으면 그냥 푸쉬한다
+                opStack.push(token)              
+        elif token is ')' : #닫는 괄호를 만나면 닫는괄호 이전까지의 스택을 모두 어팬드한다.
+            while True:
+                if opStack.peek() is '(' : #여는괄호는 어팬드하지않고 뽑기만 하고 브레이크한다
+                    opStack.pop()
+                    break 
+                answer+= (opStack.pop())        
+
+        else : #숫자면 숫자에 어팬드하고
+            answer+= (token)
+
+    #남은 스택을 모조리 어팬드친다.
+    while not opStack.isEmpty() :
+        answer += (opStack.pop())       
+    
+    return answer
