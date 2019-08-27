@@ -2,10 +2,10 @@
 
 ### Python Algorithm Study ###
 # author  : laziness
-# date    : 2019/08/20
+# date    : 2019/08/27
 
-챕터3 - 네 번째 과제
-:: 양방향 연결 리스트로 구현하는 큐::
+챕터4 - 첫 번째 과제
+::우선순위 큐의 enqueue 연산 구현::
 
 '''
 class Node:
@@ -113,7 +113,7 @@ class DoublyLinkedList:
 
     def popAt(self, pos):
         if pos < 1 or pos > self.nodeCount:
-            raise IndexError('Index out of range')
+            return None
 
         prev = self.getAt(pos - 1)
         return self.popAfter(prev)
@@ -127,30 +127,31 @@ class DoublyLinkedList:
         self.nodeCount += L.nodeCount
 
 
-class LinkedListQueue:
+class PriorityQueue:
 
     def __init__(self):
-        self.data = DoublyLinkedList()
+        self.queue = DoublyLinkedList()
+
 
     def size(self):
-        return self.data.getLength()
-
+        return self.queue.getLength()
 
     def isEmpty(self):
-        return self.data.getLength() == 0
+        return self.size() == 0
 
-
-    def enqueue(self, item):
-        node = Node(item)    
-        self.data.insertAfter(self.data.tail.prev, node)
-
+    def enqueue(self, x):
+        newNode = Node(x)
+        curr = self.queue.head
+        while curr.next.data != None and x < curr.next.data:
+            curr = curr.next
+        self.queue.insertAfter(curr, newNode)
 
     def dequeue(self):
-        return self.data.popAt(1)
-
+        return self.queue.popAt(self.queue.getLength())
 
     def peek(self):
-        return self.data.getAt(1).data
+        return self.queue.getAt(self.queue.getLength()).data
+
 
 def solution(x):
     return 0
